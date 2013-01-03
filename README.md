@@ -1,7 +1,7 @@
 textgram.js
 ===========
 
-A jquery plugin for coloring to text by image
+A jquery plugin for coloring text by specified image
 
 # Usage
 
