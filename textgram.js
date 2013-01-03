@@ -1,5 +1,5 @@
 // textgram.js 
-// A jquery plugin for coloring to text by image
+// A jquery plugin for coloring text by specified image
 // by thunder9 (https://github.com/thunder9)
 // Copyright (c) 2013 thunder9 licensed under the MIT license.
 
@@ -45,7 +45,7 @@
     return $containers.each(function() {
 
       $(this).contents().filter(function () {
-          return this.nodeType === 3;
+        return this.nodeType === 3;
       }).each(function() {
         var $textnode = $(this),
             $colored,
