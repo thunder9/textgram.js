@@ -38,7 +38,7 @@
           return this.nodeType === 3;
       }).each(function() {
         var $textnode = $(this),
-            $rainbowed,
+            $colored,
             text      = this.data,
             html      = '';
         
@@ -46,10 +46,10 @@
           html += '<span>' + text.charAt(i) + '</span>';
         }
           
-        $rainbowed = $(html);
-        $textnode.after($rainbowed);
+        $colored = $(html);
+        $textnode.after($colored);
         this.data = '';
-        $rainbowed.each(function() {
+        $colored.each(function() {
           var $ch = $(this),
               pos = $ch.position(),
               w   = $ch.width(),
