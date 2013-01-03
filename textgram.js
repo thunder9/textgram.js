@@ -21,8 +21,8 @@
       offsetY = options.y || 0;
       width = options.width || 0;
       height = options.height || 0; 
-      repeatX = options.repeatX || false;
-      repeatY = options.repeatY || false;
+      repeatX = options.repeat === 'yes' || options.repeat === 'x';  
+      repeatY = options.repeat === 'yes' || options.repeat === 'y';  
     } else {
       image = options;
     }
@@ -68,7 +68,7 @@
               y   = (pos.top + 0.5 * h - offsetY) / height;
           w *= image.width / width;
           h *= image.height / height;
-          if (x >= 0 && y >= 0 && (repeatX || x <= 1) && (repeatY || y <= 1)) { 
+          if ((repeatX || x >= 0 && x <= 1) && (repeatY || y >= 0 && y <= 1)) { 
             var rgba    = [0, 0, 0, 0],
                 counted = 0;
             x = (x - Math.floor(x)) * image.width;
