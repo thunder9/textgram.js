@@ -10,7 +10,7 @@
         repeatX = false,
         repeatY = false;
 
-    if (!($.isPlainObject(options))) options = { image: options };
+    if (!$.isPlainObject(options)) options = { image: options };
     opts = $.extend({}, $.fn.textgram.defaults, options);
 
     if (!opts.image) return this;
