@@ -67,8 +67,8 @@
             h *= image.height;
             for (var s = -w; s < w; s++) {
               for (var t = -h; t < h; t++) {
-                var u = Math.round(x + s - w),
-                    v = Math.round(y + t - h);
+                var u = Math.round(x + s),
+                    v = Math.round(y + t);
                 if (u >= 0 && u < image.width && v >= 0 && v < image.height) {
                   for (var i = 0; i < 4; i++) {
                     rgba[i] += image.data[(u + v * image.width) * 4 + i];
