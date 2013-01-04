@@ -6,29 +6,21 @@
 ;(function($) {
             
   $.fn.textgram = function(options) {
-    var $containers = this,
-        image       = null,
-        offsetX     = 0,
-        offsetY     = 0,
-        width       = 0,
-        height      = 0,
-        repeatX     = false,
-        repeatY     = false;
+    var opts, image, width, height,
+        repeatX = false,
+        repeatY = false;
 
-    if ($.isPlainObject(options)) {
-      image = options.image || null;
-      offsetX = options.x || 0;
-      offsetY = options.y || 0;
-      width = options.width || 0;
-      height = options.height || 0; 
-      repeatX = options.repeat === 'yes' || options.repeat === 'x';  
-      repeatY = options.repeat === 'yes' || options.repeat === 'y';  
-    } else {
-      image = options;
-    }
-    
-    if (!image) return false;  
+    if (!($.isPlainObject(options))) options = { image: options };
+    opts = $.extend({}, $.fn.textgram.defaults, options);
+
+    if (!opts.image) return this;
       
+    image = opts.image;
+    width = opts.width;
+    height = opts.height;
+    repeatX = opts.repeat === 'yes' || opts.repeat === 'x';  
+    repeatY = opts.repeat === 'yes' || opts.repeat === 'y';  
+          
     if ('width' in image && 'height' in image) {
       width = width || image.width;
       height = height || image.height;       
@@ -42,7 +34,7 @@
       image = context.getImageData(0, 0, width, height);
     }
       
-    return $containers.each(function() {
+    return this.each(function() {
 
       $(this).contents().filter(function () {
         return this.nodeType === 3;
@@ -64,8 +56,8 @@
               pos = $ch.position(),
               w   = $ch.width(),
               h   = $ch.height(),
-              x   = (pos.left + 0.5 * w - offsetX) / width,
-              y   = (pos.top + 0.5 * h - offsetY) / height;
+              x   = (pos.left + 0.5 * w - opts.x) / width,
+              y   = (pos.top + 0.5 * h - opts.y) / height;
           w *= image.width / width;
           h *= image.height / height;
           if ((repeatX || x >= 0 && x <= 1) && (repeatY || y >= 0 && y <= 1)) { 
@@ -96,6 +88,15 @@
       });
     });
       
+  };
+  
+  $.fn.textgram.defaults = {
+    // image: required
+    x: 0,
+    y: 0,
+    width: 0, // set image.width if falsy value
+    height: 0, // set image.height if falsy value
+    repeat: 'no'
   };
     
 }(jQuery));
