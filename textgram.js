@@ -54,26 +54,27 @@
         $colored.each(function() {
           var $ch = $(this),
               pos = $ch.position(),
-              w   = $ch.width(),
-              h   = $ch.height(),
-              x   = (pos.left + 0.5 * w - opts.x) / width,
-              y   = (pos.top + 0.5 * h - opts.y) / height;
-          w *= image.width / width;
-          h *= image.height / height;
+              w   = $ch.width() / width * 0.5,
+              h   = $ch.height() / height * 0.5,
+              x   = (pos.left - opts.x) / width + w,
+              y   = (pos.top - opts.y) / height + h;
           if ((repeatX || x >= 0 && x <= 1) && (repeatY || y >= 0 && y <= 1)) { 
             var rgba    = [0, 0, 0, 0],
                 counted = 0;
             x = (x - Math.floor(x)) * image.width;
             y = (y - Math.floor(y)) * image.height;
-            for (var s = 0; s < w; s++) {
-              for (var t = 0; t < h; t++) {
-                var u   = Math.round(x + s - 0.5 * w),
-                    v   = Math.round(y + t - 0.5 * h),
-                    pos = u + v * image.width;
-                for (var i = 0; i < 4; i++) {
-                  rgba[i] += image.data[pos * 4 + i];
+            w *= image.width;
+            h *= image.height;
+            for (var s = -w; s < w; s++) {
+              for (var t = -h; t < h; t++) {
+                var u = Math.round(x + s - w),
+                    v = Math.round(y + t - h);
+                if (u >= 0 && u < image.width && v >= 0 && v < image.height) {
+                  for (var i = 0; i < 4; i++) {
+                    rgba[i] += image.data[(u + v * image.width) * 4 + i];
+                  }
+                  counted++;
                 }
-                counted++;
               }  
             }
             if (counted > 0) {
