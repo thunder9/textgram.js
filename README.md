@@ -3,6 +3,8 @@ textgram.js
 
 A jquery plugin for coloring text by specified image
 
+Try [previewer](http://textgram.herokuapp.com/).
+
 # Usage
 
 Call the plugin on the selected elements containing the target text with image.
