@@ -16,7 +16,7 @@ $('#target').textgram(image);
 // multiple options are also allowed
 $('#target').textgram({
   image: image, // (same as single option case)
-  x: 50, // horizontal offset of the area to be coloring
+  x: 50, // horizontal offset of the area to be coloring from offsetParent
   y: 0, // vertical offset of the area
   width: 200, // width of the area
   height: 100, // height of the area
